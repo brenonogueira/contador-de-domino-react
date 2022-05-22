@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable react-hooks/exhaustive-deps */
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Placar } from "./pages/Placar";
+import { Players } from "./pages/Players";
 
 function App() {
+  const location = useLocation();
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/players");
+    }
+  }, []);
+
+  // useEffect(() => {}, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/players" element={<Players />}></Route>
+        <Route path="/placar" element={<Placar />}></Route>
+      </Routes>
+    </>
   );
 }
 
